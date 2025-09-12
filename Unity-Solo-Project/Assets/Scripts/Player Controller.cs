@@ -1,13 +1,15 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 
 public class PlayerController : MonoBehaviour
 {
     Vector2 cameraRotation;
     Vector3 cameraOffset;
+    public Vector3 respawnPoint;
     InputAction lookVector;
-    Camera playerCam;
+    Transform playerCam;
 
     Rigidbody rb;
 
@@ -20,21 +22,31 @@ public class PlayerController : MonoBehaviour
     public float Ysensitivity = 1.0f;
     public float camRotationLimit = 90.0f;
 
+    public int health = 7;
+    public int maxHealth = 7;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void Start()
     {
         cameraOffset = new Vector3(0, .5f, .5f);
+        respawnPoint = new Vector3(0, 1, 0);
         rb = GetComponent<Rigidbody>();
-        playerCam = Camera.main;
+        playerCam = Transform.GetChild(0);
         lookVector = GetComponent<PlayerInput>().currentActionMap.FindAction("Look");
         cameraRotation = Vector2.zero;
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
     private void Update()
     {
+        if (health <= 0)
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        
         // Camera Rotation System
-        playerCam.transform.position = transform.position + cameraOffset;
 
         cameraRotation.x += lookVector.ReadValue<Vector2>().x * Xsensitivity;
         cameraRotation.y += lookVector.ReadValue<Vector2>().y * Ysensitivity;
@@ -59,5 +71,11 @@ public class PlayerController : MonoBehaviour
 
         verticleMove = inputAxis.y;
         horizontalMove = inputAxis.x;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Elimination Area")
+            health = 0;
     }
 }
