@@ -5,22 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    Vector2 cameraRotation;
-    Vector3 cameraOffset;
-    public Vector3 respawnPoint;
-    InputAction lookVector;
-    Transform playerCam;
-
+    Camera playerCam;
     Rigidbody rb;
+    Ray ray;
+    RaycastHit hit;
 
     public float verticleMove;
     public float horizontalMove;
 
     public float speed = 5f;
     public float jumpHeight = 10f;
-    public float Xsensitivity = 1.0f;
-    public float Ysensitivity = 1.0f;
-    public float camRotationLimit = 90.0f;
+    public float groundDetectLength = .5f;
 
     public int health = 7;
     public int maxHealth = 7;
@@ -29,13 +24,10 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void Start()
     {
-        cameraOffset = new Vector3(0, .5f, .5f);
-        respawnPoint = new Vector3(0, 1, 0);
+        ray = new Ray(transform.position, transform.forward);
         rb = GetComponent<Rigidbody>();
-        playerCam = Transform.GetChild(0);
-        lookVector = GetComponent<PlayerInput>().currentActionMap.FindAction("Look");
-        cameraRotation = Vector2.zero;
-
+        playerCam = Camera.main;
+        
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -47,20 +39,21 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         
         // Camera Rotation System
-
-        cameraRotation.x += lookVector.ReadValue<Vector2>().x * Xsensitivity;
-        cameraRotation.y += lookVector.ReadValue<Vector2>().y * Ysensitivity;
-
-        cameraRotation.y = Mathf.Clamp(cameraRotation.y, -camRotationLimit, camRotationLimit);
-
-        playerCam.transform.rotation = Quaternion.Euler(-cameraRotation.y, cameraRotation.x, 0);
-        transform.localRotation = Quaternion.AngleAxis(cameraRotation.x, Vector3.up);
+        Quaternion playerRotation = playerCam.transform.rotation;
+        playerRotation.x = 0;
+        playerRotation.z = 0;
+        transform.rotation = playerRotation;
 
         // Movement System
         Vector3 temp = rb.linearVelocity;
 
         temp.x = verticleMove * speed;
         temp.z = horizontalMove * speed;
+
+        
+        ray.origin = transform.position;
+        ray.direction = -transform.up;
+
 
         rb.linearVelocity = (temp.x * transform.forward) + (temp.y * transform.up) + (temp.z * transform.right);
     }
@@ -71,6 +64,12 @@ public class PlayerController : MonoBehaviour
 
         verticleMove = inputAxis.y;
         horizontalMove = inputAxis.x;
+    }
+
+    public void Jump ()
+    {
+        if (Physics.Raycast(ray, groundDetectLength))
+            rb.AddForce(transform.up * jumpHeight);
     }
 
     private void OnTriggerEnter(Collider other)
