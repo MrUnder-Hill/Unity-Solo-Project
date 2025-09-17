@@ -69,12 +69,25 @@ public class PlayerController : MonoBehaviour
     public void Jump ()
     {
         if (Physics.Raycast(ray, groundDetectLength))
-            rb.AddForce(transform.up * jumpHeight);
+            rb.AddForce(transform.up * jumpHeight, ForceMode.Impulse);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Elimination Area")
             health = 0;
+
+        if ((other.tag == "Health") && (health < maxHealth))
+        {
+            health++;
+            Destroy(other.gameObject);
+        }
+                
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Hazard")
+            health--;
     }
 }
