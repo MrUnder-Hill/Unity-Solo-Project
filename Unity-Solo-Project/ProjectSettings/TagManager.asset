@@ -7,6 +7,8 @@ TagManager:
   - Elimination Area
   - Health
   - Hazard
+  - Enemy
+  - Vision
   layers:
   - Default
   - TransparentFX

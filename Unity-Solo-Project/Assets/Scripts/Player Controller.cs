@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     Ray ray;
     RaycastHit hit;
 
-    public float verticleMove;
+    public float verticalMove;
     public float horizontalMove;
 
     public float speed = 5f;
@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
         ray = new Ray(transform.position, transform.forward);
         rb = GetComponent<Rigidbody>();
         playerCam = Camera.main;
-        
+
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
     {
         if (health <= 0)
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        
+
         // Camera Rotation System
         Quaternion playerRotation = playerCam.transform.rotation;
         playerRotation.x = 0;
@@ -47,10 +47,10 @@ public class PlayerController : MonoBehaviour
         // Movement System
         Vector3 temp = rb.linearVelocity;
 
-        temp.x = verticleMove * speed;
+        temp.x = verticalMove * speed;
         temp.z = horizontalMove * speed;
 
-        
+
         ray.origin = transform.position;
         ray.direction = -transform.up;
 
@@ -62,11 +62,11 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 inputAxis = context.ReadValue<Vector2>();
 
-        verticleMove = inputAxis.y;
+        verticalMove = inputAxis.y;
         horizontalMove = inputAxis.x;
     }
 
-    public void Jump ()
+    public void Jump()
     {
         if (Physics.Raycast(ray, groundDetectLength))
             rb.AddForce(transform.up * jumpHeight, ForceMode.Impulse);
@@ -82,12 +82,14 @@ public class PlayerController : MonoBehaviour
             health++;
             Destroy(other.gameObject);
         }
-                
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Hazard")
+            health--;
+        
+        if (collision.gameObject.tag == "Enemy")
             health--;
     }
 }
