@@ -9,6 +9,7 @@ public class BasicEneeyController : MonoBehaviour
     public int maxHealth = 3;
 
     NavMeshAgent agent;
+    GameObject enemy;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,10 +20,15 @@ public class BasicEneeyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-         void OnCollisionEnter(Collision collision)
+        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if ((other.tag == "Vision") && (other.tag == "Player"))
         {
            agent.destination = GameObject.Find("Player").transform.position;
-    
+        }
         
     }
 }
