@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BasicEneeyController : MonoBehaviour
+public class BasicEnemyController : MonoBehaviour
 {
     public float speed = 2f;
    
@@ -20,15 +20,14 @@ public class BasicEneeyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        agent.destination = GameObject.Find("Player").transform.position;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if ((other.tag == "Vision") && (other.tag == "Player"))
         {
-           agent.destination = GameObject.Find("Player").transform.position;
+            agent.destination = GameObject.Find("Player").transform.position;
         }
-        
     }
 }
