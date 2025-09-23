@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     public int health = 7;
     public int maxHealth = 7;
 
+    public bool attacking = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void Start()
@@ -66,13 +67,17 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(interactRay, out interactHit, interactDistance))
         {
-            if (interactHit.collider.gameObject.tag == "weapon")
+            if (interactHit.collider.gameObject.tag == "Weapon")
             {
                 pickupObj = interactHit.collider.gameObject;
             }
         }
         else
             pickupObj = null;
+
+        if (currentWeapon)
+            if (currentWeapon.holdToAttack && attacking)
+                currentWeapon.fire();
 
         rb.linearVelocity = (temp.x * transform.forward) + (temp.y * transform.up) + (temp.z * transform.right);
     }
@@ -107,16 +112,26 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Hazard")
             health--;
-        
+
         if (collision.gameObject.tag == "Enemy")
             health--;
     }
 
-    public void Attack()
+    public void Attack(InputAction.CallbackContext context)
     {
         if (currentWeapon)
         {
-            currentWeapon.fire();
+            if (currentWeapon.holdToAttack)
+            {
+                if (context.ReadValueAsButton())
+                    attacking = true;
+                else
+                    attacking = false;
+            }
+
+            else
+                if (context.ReadValueAsButton())
+                currentWeapon.fire();
         }
     }
     public void Reload()
@@ -128,7 +143,7 @@ public class PlayerController : MonoBehaviour
     {
         if (pickupObj)
         {
-            if (pickupObj.tag == "weapon")
+            if (pickupObj.tag == "Weapon")
                 pickupObj.GetComponent<Weapon>().equip(this);
         }
         else
@@ -136,7 +151,7 @@ public class PlayerController : MonoBehaviour
     }
     public void DropWeapon()
     {
-        if(currentWeapon)
+        if (currentWeapon)
         {
             currentWeapon.GetComponent<Weapon>().unequip(this);
         }

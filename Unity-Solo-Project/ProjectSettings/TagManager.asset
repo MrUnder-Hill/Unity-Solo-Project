@@ -9,6 +9,8 @@ TagManager:
   - Hazard
   - Enemy
   - Vision
+  - Weapon
+  - proj
   layers:
   - Default
   - TransparentFX
