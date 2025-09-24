@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     public void Start()
     {
         input = GetComponent<PlayerInput>();
-        jumpRay = new Ray(transform.position, transform.forward);
+        jumpRay = new Ray(transform.position, -transform.up);
         interactRay = new Ray(transform.position, transform.forward);
         rb = GetComponent<Rigidbody>();
         playerCam = Camera.main;
@@ -137,7 +137,8 @@ public class PlayerController : MonoBehaviour
     public void Reload()
     {
         if (currentWeapon)
-            currentWeapon.reload();
+            if (!currentWeapon.reloading)
+                currentWeapon.reload();
     }
     public void Interact()
     {
@@ -145,6 +146,8 @@ public class PlayerController : MonoBehaviour
         {
             if (pickupObj.tag == "Weapon")
                 pickupObj.GetComponent<Weapon>().equip(this);
+
+            pickupObj = null;
         }
         else
             Reload();
@@ -153,7 +156,7 @@ public class PlayerController : MonoBehaviour
     {
         if (currentWeapon)
         {
-            currentWeapon.GetComponent<Weapon>().unequip(this);
+            currentWeapon.GetComponent<Weapon>().unequip();
         }
     }
 }
