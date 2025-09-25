@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 public class BasicEnemyController : MonoBehaviour
 {
-    public PlayerController player;
+    PlayerController player;
 
     [Header("Logic")]
     NavMeshAgent agent;
@@ -18,7 +18,7 @@ public class BasicEnemyController : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        player = GameObject.FindGameObjectsWithTag("Player").GetComponent<PlayerController>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame

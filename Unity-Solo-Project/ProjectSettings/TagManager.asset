@@ -11,6 +11,8 @@ TagManager:
   - Vision
   - Weapon
   - proj
+  - UI_Healthbar
+  - Pause
   layers:
   - Default
   - TransparentFX
