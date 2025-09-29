@@ -24,7 +24,6 @@ public class BasicEnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (isFollowing)
             agent.destination = player.transform.position;
 
