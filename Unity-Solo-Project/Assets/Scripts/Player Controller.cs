@@ -65,12 +65,18 @@ public class PlayerController : MonoBehaviour
         jumpRay.origin = transform.position;
         jumpRay.direction = -transform.up;
 
-        if (Physics.Raycast(interactRay, out interactHit, interactDistance))
+		interactRay.origin = playerCam.transform.position;
+        interactRay.direction = playerCam.transform.forward;
+
+
+		if (Physics.Raycast(interactRay, out interactHit, interactDistance))
         {
             if (interactHit.collider.gameObject.tag == "Weapon")
             {
                 pickupObj = interactHit.collider.gameObject;
-            }
+
+                Debug.Log("Looking at weapon");
+			}
         }
         else
             pickupObj = null;

@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (SceneManager.GetActiveScene().buildIndex > +1)
+        if (SceneManager.GetActiveScene().buildIndex >= 1)
         {
             player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
             healthBar = GameObject.FindGameObjectWithTag("UI_Healthbar").GetComponent<Image>();
@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (SceneManager.GetActiveScene().buildIndex > +1)
+        if (SceneManager.GetActiveScene().buildIndex >= 1)
             healthBar.fillAmount = (float) player.health / (float) player.maxHealth;
     }
 
