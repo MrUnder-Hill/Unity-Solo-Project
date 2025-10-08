@@ -13,6 +13,9 @@ TagManager:
   - proj
   - UI_Healthbar
   - Pause
+  - Resume
+  - Quit
+  - Main_Menu
   layers:
   - Default
   - TransparentFX

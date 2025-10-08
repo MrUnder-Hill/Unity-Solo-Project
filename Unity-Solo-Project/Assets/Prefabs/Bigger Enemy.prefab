@@ -24,6 +24,10 @@ PrefabInstance:
       propertyPath: m_Acceleration
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 4231054418404923578, guid: a032f3063bca9ed4781bde3ff44e245d, type: 3}
+      propertyPath: m_AutoTraverseOffMeshLink
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5792515630858712487, guid: a032f3063bca9ed4781bde3ff44e245d, type: 3}
       propertyPath: health
       value: 10
