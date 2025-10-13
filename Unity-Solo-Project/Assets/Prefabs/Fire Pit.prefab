@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5842443526243244625}
   - component: {fileID: 1914694179230815700}
   m_Layer: 0
-  m_Name: Bad Thingy Test
+  m_Name: Fire Pit
   m_TagString: Hazard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

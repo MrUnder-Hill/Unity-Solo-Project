@@ -165,10 +165,4 @@ public class PlayerController : MonoBehaviour
             currentWeapon.GetComponent<Weapon>().unequip();
         }
     }
-
-    public void GameOver()
-    {
-        if (health <= 0)
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
 }
