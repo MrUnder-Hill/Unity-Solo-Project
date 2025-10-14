@@ -4,6 +4,7 @@ using UnityEngine.AI;
 public class BasicEnemyController : MonoBehaviour
 {
     PlayerController player;
+    Animator myAnim;
 
     [Header("Logic")]
     NavMeshAgent agent;
@@ -19,13 +20,23 @@ public class BasicEnemyController : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        myAnim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
         if (isFollowing)
+        {
+            agent.isStopped = false;
             agent.destination = player.transform.position;
+            myAnim.SetBool("isAttacking", true);
+        }
+        else
+        {
+            myAnim.SetBool("isAttacking", false);
+            agent.isStopped = true;
+        }
 
         if (health <= 0)
         { 
