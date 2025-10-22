@@ -205,6 +205,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a8da74b79a808ee43ad728348e44bb27, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1196170443515351533}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a8da74b79a808ee43ad728348e44bb27, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -107802230259430758}
   m_SourcePrefab: {fileID: 100100000, guid: a8da74b79a808ee43ad728348e44bb27, type: 3}
 --- !u!4 &7042748777692100337 stripped
 Transform:
@@ -298,3 +301,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!95 &-107802230259430758
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7707644816159878219}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 1
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
