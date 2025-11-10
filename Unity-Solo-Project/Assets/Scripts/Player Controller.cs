@@ -47,7 +47,9 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         if (health <= 0)
+        {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }                                                 
 
         // Camera Rotation System
         Quaternion playerRotation = playerCam.transform.rotation;

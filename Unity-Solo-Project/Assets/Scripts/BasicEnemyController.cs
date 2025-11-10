@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Apple;
+using UnityEngine.SceneManagement;
 
 public class BasicEnemyController : MonoBehaviour
 {
@@ -19,17 +21,20 @@ public class BasicEnemyController : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+       
         myAnim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        Vector3 player = GameObject.FindGameObjectWithTag("Player").transform.position;
+
+
         if (isFollowing)
         {
             agent.isStopped = false;
-            agent.destination = player.transform.position;
+            agent.SetDestination(player);
             myAnim.SetBool("isAttacking", true);
         }
         else
@@ -39,11 +44,11 @@ public class BasicEnemyController : MonoBehaviour
         }
 
         if (health <= 0)
-        { 
-            agent.isStopped= true;
+        {
+            agent.isStopped = true;
             Destroy(gameObject);
         }
-           
+
     }
 
     private void OnCollisionEnter(Collision collision)

@@ -116,8 +116,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 505459097757536473}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.7130389, z: -0, w: 0.7011244}
-  m_LocalPosition: {x: 510.241, y: 1.151, z: 873.208}
+  m_LocalRotation: {x: -0, y: -0.01800475, z: -0, w: 0.999838}
+  m_LocalPosition: {x: 510.2175, y: 1.151, z: 873.2771}
   m_LocalScale: {x: 0.098437, y: 0.098437, z: 0.098437}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -127,7 +127,7 @@ Transform:
   - {fileID: 5540850627820271647}
   - {fileID: 1766850433176102292}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 90.965, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -2.063, z: 0}
 --- !u!114 &4664813060052421157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,7 +210,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -304,7 +304,7 @@ MeshRenderer:
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
-  m_MotionVectors: 1
+  m_MotionVectors: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
