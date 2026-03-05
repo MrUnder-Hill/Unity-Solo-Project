@@ -127,6 +127,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adaeedd505917844592234e7e8452faa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageSoundClips:
+  - {fileID: 8300000, guid: 31324761c5c6589409cc5928213896b9, type: 3}
+  - {fileID: 8300000, guid: 97fa6808b602d044b87230b8be36d54e, type: 3}
+  - {fileID: 8300000, guid: 8d5bec3bf7b970b47978a5a889babd6b, type: 3}
   isFollowing: 1
   health: 3
   maxHealth: 3

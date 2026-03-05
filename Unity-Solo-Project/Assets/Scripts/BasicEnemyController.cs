@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Apple;
@@ -5,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class BasicEnemyController : MonoBehaviour
 {
+    [SerializeField] private AudioClip[] damageSoundClips;
     PlayerController player;
     Animator myAnim;
 
@@ -21,8 +23,9 @@ public class BasicEnemyController : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-       
+
         myAnim = GetComponent<Animator>();
+        
     }
 
     // Update is called once per frame
@@ -56,6 +59,10 @@ public class BasicEnemyController : MonoBehaviour
         if (collision.gameObject.tag == "proj")
         {
             health--;
+
+            //play sfx
+            //SoundFXManager.instance.PlaySoundFXClip(damageSoundClip, transform, 1f);
+            SoundFXManager.instance.PlayRandomSoundFXClip(damageSoundClips, transform, 1f);
         }
     }
 }

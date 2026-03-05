@@ -16,6 +16,7 @@ TagManager:
   - Resume
   - Quit
   - Main_Menu
+  - MusicTrigger
   layers:
   - Default
   - TransparentFX

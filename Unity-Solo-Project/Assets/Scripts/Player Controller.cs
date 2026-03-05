@@ -26,8 +26,11 @@ public class PlayerController : MonoBehaviour
 
     public int health = 7;
     public int maxHealth = 7;
+    private int f = 0;
 
     public bool attacking = false;
+    
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void Start()
@@ -114,16 +117,30 @@ public class PlayerController : MonoBehaviour
             health++;
             Destroy(other.gameObject);
         }
+
+        f = 1 - f;
+        if (other.tag == "MusicTrigger" && f == 0)
+        {
+            MusicTimelineManager.playerHunted?.Invoke(1, true, 1f);
+            MusicTimelineManager.playerHunted?.Invoke(0, false, 1f);
+        }
+        else
+        {
+            MusicTimelineManager.playerHunted?.Invoke(1, false, 1f);
+            MusicTimelineManager.playerHunted?.Invoke(0, true, 1f);
+        }
+        Debug.Log("Player entered music trigger");
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
+
+        private void OnCollisionEnter(Collision collision)
+        {
         if (collision.gameObject.tag == "Hazard")
             health--;
 
         if (collision.gameObject.tag == "Enemy")
             health--;
-    }
+        }
 
     public void Attack(InputAction.CallbackContext context)
     {
